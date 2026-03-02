@@ -11,7 +11,7 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: always
+      mode: never
   datasource:
     url: jdbc:postgresql://localhost:5432/ewm_main_db
     username: ewm_user

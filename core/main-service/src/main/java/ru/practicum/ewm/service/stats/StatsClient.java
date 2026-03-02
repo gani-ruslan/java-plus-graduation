@@ -20,7 +20,7 @@ public class StatsClient {
     private static final DateTimeFormatter F = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public StatsClient(
-            @Value("${ewm.stats.url:http://localhost:9090}") String baseUrl,
+            @Value("${stats-client.base-url:http://localhost:9090}") String baseUrl,
             @Value("${spring.application.name:ewm-service}") String appName
     ) {
         this.client = RestClient.builder().baseUrl(baseUrl).build();

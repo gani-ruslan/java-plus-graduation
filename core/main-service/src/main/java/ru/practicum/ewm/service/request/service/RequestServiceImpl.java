@@ -62,7 +62,7 @@ public class RequestServiceImpl implements RequestService {
         req.setEvent(event);
         req.setCreated(LocalDateTime.now());
 
-        // Автоподтверждение: либо модерация отключена, либо лимит = 0 (без ограничений)
+        // Авто подтверждение: либо модерация отключена, либо лимит = 0 (без ограничений)
         boolean unlimited = event.getParticipantLimit() == 0;
         boolean autoConfirm = !event.isRequestModeration() || unlimited;
 
@@ -133,15 +133,14 @@ public class RequestServiceImpl implements RequestService {
                     .build();
         }
 
-        String action = body.getStatus();
-        if (!"CONFIRMED".equalsIgnoreCase(action) && !"REJECTED".equalsIgnoreCase(action)) {
+        if (body.getStatus() != RequestStatus.CONFIRMED && body.getStatus() != RequestStatus.REJECTED) {
             throw new IllegalArgumentException("status must be CONFIRMED or REJECTED");
         }
 
         int limit = event.getParticipantLimit();
         long alreadyConfirmed = requestRepository.countByEventIdAndStatus(eventId, RequestStatus.CONFIRMED);
 
-        if ("CONFIRMED".equalsIgnoreCase(action) && limit > 0 && alreadyConfirmed >= limit) {
+        if (body.getStatus() == RequestStatus.CONFIRMED && limit > 0 && alreadyConfirmed >= limit) {
             throw new IllegalStateException("The participant limit has been reached");
         }
 
@@ -160,7 +159,7 @@ public class RequestServiceImpl implements RequestService {
                 throw new IllegalStateException("Можно изменять только заявки в статусе PENDING");
             }
 
-            if ("REJECTED".equalsIgnoreCase(action)) {
+            if (body.getStatus() == RequestStatus.REJECTED) {
                 r.setStatus(RequestStatus.REJECTED);
                 rejected.add(RequestMapper.toRequestDto(r));
             } else { // CONFIRMED
@@ -169,7 +168,7 @@ public class RequestServiceImpl implements RequestService {
                     confirmed.add(RequestMapper.toRequestDto(r));
                     capacity--;
                 } else {
-                    // сюда попадём только если capacity закончился в процессе —
+                    // Сюда попадаем, если capacity закончился в процессе —
                     // такие заявки переводим в REJECTED по ТЗ
                     r.setStatus(RequestStatus.REJECTED);
                     rejected.add(RequestMapper.toRequestDto(r));

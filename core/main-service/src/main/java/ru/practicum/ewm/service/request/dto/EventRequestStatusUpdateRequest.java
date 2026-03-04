@@ -1,6 +1,7 @@
 package ru.practicum.ewm.service.request.dto;
 
 import lombok.*;
+import ru.practicum.ewm.service.request.model.RequestStatus;
 import java.util.List;
 
 @Getter
@@ -10,5 +11,5 @@ import java.util.List;
 @Builder
 public class EventRequestStatusUpdateRequest {
     private List<Long> requestIds;  // какие заявки трогаем
-    private String status;          // "CONFIRMED" или "REJECTED"
+    private RequestStatus status;   // "CONFIRMED" или "REJECTED"
 }

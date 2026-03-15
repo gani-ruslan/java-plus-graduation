@@ -65,13 +65,10 @@ public class HitServiceImpl implements HitService {
 
         log.info("Query returned {} results", result.size());
 
-        if (result == null || result.isEmpty()) {
+        if (result.isEmpty()) {
             return List.of();
         }
         result.sort(Comparator.comparingLong(ViewStatsDto::getHits).reversed());
-
-        long totalHits = hitRepository.count();
-        log.info("Total hits in DB: {}", totalHits);
         return result;
     }
 }

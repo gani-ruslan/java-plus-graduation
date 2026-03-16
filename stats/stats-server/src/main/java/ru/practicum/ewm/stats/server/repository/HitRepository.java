@@ -39,5 +39,5 @@ public interface HitRepository extends JpaRepository<EndpointHit, Long> {
             "GROUP BY h.app, h.uri")
     List<ViewStatsDto> getUniqueStatsByUris(@Param("start") LocalDateTime start,
                                             @Param("end") LocalDateTime end,
-                                            List<String> uris);
+                                            @Param("uris") List<String> uris);
 }

@@ -7,26 +7,23 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.3.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<name>Explore With Me</name>
+	<groupId>ru.practicum</groupId>
+	<artifactId>explore-with-me</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
 	<modules>
 		<module>infra</module>
 		<module>core</module>
 		<module>stats</module>
 	</modules>
 
-	<groupId>ru.practicum</groupId>
-	<artifactId>explore-with-me</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-
 	<properties>
 		<java.version>21</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-		<!-- Plugins -->
 		<avro.version>1.11.3</avro.version>
 		<kafka-clients.version>3.6.1</kafka-clients.version>
 		<springdoc-openapi-starter.version>2.6.0</springdoc-openapi-starter.version>
@@ -37,6 +34,8 @@
 		<avro-maven-plugin.version>${avro.version}</avro-maven-plugin.version>
 		<protobuf-plugin.version>2.4.0</protobuf-plugin.version>
 		<spring-cloud.version>2023.0.4</spring-cloud.version>
+		<querydsl.version>5.1.0</querydsl.version>
+		<spring-retry.version>2.0.12</spring-retry.version>
 	</properties>
 
 	<dependencyManagement>
@@ -52,12 +51,6 @@
 				<groupId>org.apache.kafka</groupId>
 				<artifactId>kafka-clients</artifactId>
 				<version>${kafka-clients.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springdoc</groupId>
-				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-				<version>${springdoc-openapi-starter.version}</version>
 			</dependency>
 
 			<dependency>
@@ -96,6 +89,29 @@
 			<dependency>
 				<groupId>org.springframework.retry</groupId>
 				<artifactId>spring-retry</artifactId>
+				<version>${spring-retry.version}</version>
+			</dependency>
+
+			<!-- QueryDSL (runtime) -->
+			<dependency>
+				<groupId>com.querydsl</groupId>
+				<artifactId>querydsl-jpa</artifactId>
+				<version>${querydsl.version}</version>
+				<classifier>jakarta</classifier>
+			</dependency>
+
+			<dependency>
+				<groupId>com.querydsl</groupId>
+				<artifactId>querydsl-core</artifactId>
+				<version>${querydsl.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.querydsl</groupId>
+				<artifactId>querydsl-apt</artifactId>
+				<version>${querydsl.version}</version>
+				<classifier>jakarta</classifier>
+				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

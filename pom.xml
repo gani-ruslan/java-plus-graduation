@@ -19,12 +19,6 @@
 		<module>infra</module>
 		<module>core</module>
 		<module>stats</module>
-        <module>stats/serialization</module>
-		<module>stats/collector</module>
-		<module>stats/aggregator</module>
-		<module>stats/analyzer</module>
-		<module>stats/serialization/avro-schemas</module>
-		<module>stats/serialization/proto-schemas</module>
 	</modules>
 
 	<properties>

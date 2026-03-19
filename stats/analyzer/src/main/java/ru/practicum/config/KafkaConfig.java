@@ -13,7 +13,6 @@ import org.springframework.context.annotation.Scope;
 import ru.practicum.kafka.deserializer.EventSimilarityDeserializer;
 import ru.practicum.kafka.deserializer.UserActionDeserializer;
 
-
 import java.time.Duration;
 import java.util.Properties;
 

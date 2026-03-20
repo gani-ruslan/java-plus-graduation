@@ -199,8 +199,7 @@ public class RequestService {
                 );
     }
 
-    @Transactional(readOnly = true)
-    public Boolean hasUserIdAttendEventId(Long userId, Long eventId) {
+       public Boolean hasUserIdAttendEventId(Long userId, Long eventId) {
         return requestRepository.existsByRequesterIdAndEventId(userId, eventId);
     }
 }

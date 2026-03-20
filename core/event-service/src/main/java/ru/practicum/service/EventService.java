@@ -279,10 +279,7 @@ public class EventService {
             );
         }
 
-        // BAD-IDEA
-        if (!requestServiceGateway.hasUserIdAttendEventId(
-                userServiceGateway.getUserById(userId).getId(),
-                eventId)) {
+        if (!requestServiceGateway.hasUserIdAttendEventId(userId, eventId)) {
             throw new IllegalArgumentException(
                     "The user did not attend the event."
             );
